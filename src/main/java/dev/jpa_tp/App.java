@@ -1,16 +1,20 @@
 package dev.jpa_tp;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 
 
 public class App {
+	
 	public static void main(String[] args) {
 
 		// Etape 1 - Créer une instance d'EntityManagerFactory
@@ -43,10 +47,32 @@ public class App {
 			System.out.println(unLivre.getId() + " - " + unLivre.getTitre() + " - " + unLivre.getAuteur());
 		});
 		
-		Livre livre1 = new Livre();
-		livre1.setId(201);
-		livre1.setAuteur("Rossi");
-		livre1.setTitre("formation jpa");
+		// Réaliser une requête qui permet d’extraire un emprunt et tous ses livres associés.
+		TypedQuery<Emprunt> requeteEmprunt = em1.createQuery("SELECT e FROM Emprunt e", Emprunt.class);
+		
+		List<Emprunt> emprunts = requeteEmprunt.getResultList();
+		
+		emprunts.forEach(emprunt -> {
+			System.out.println(emprunt.getId() + " - délai: " + emprunt.getDelai() + emprunt.getLivres());
+		});
+		
+		// Réaliser une requête qui permet d’extraire tous les emprunts d’un client donné.
+		TypedQuery<Emprunt> requeteEmpruntClient = em1.createQuery("SELECT e FROM Emprunt e WHERE e.client.id = :id", Emprunt.class);
+		requeteEmpruntClient.setParameter("id", 1);
+		
+		List<Emprunt> empruntClient = requeteEmpruntClient.getResultList();
+		
+		empruntClient.forEach(e -> {
+			
+			System.out.println(e.getClient().getNom() + " " + e.getClient().getPrenom() + " -> " + e);
+			
+		});
+		
+		// Exemple persist/merge
+//		Livre livre1 = new Livre();
+//		livre1.setId(201);
+//		livre1.setAuteur("Rossi");
+//		livre1.setTitre("formation jpa");
 		
 		// Pour faire un insert
 //		em1.persist(livre1);

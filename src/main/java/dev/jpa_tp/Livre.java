@@ -1,10 +1,16 @@
 package dev.jpa_tp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -14,19 +20,36 @@ import javax.persistence.Table;
  *
  */
 @Entity // obligatoire
-@Table(name="livre")
+@Table(name = "livre")
 public class Livre {
 
 	@Id // obligatoire
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Integer id;
-	
-	@Column(name="TITRE")
+
+	@Column(name = "TITRE")
 	private String titre;
-	
-	@Column(name="AUTEUR")
+
+	@Column(name = "AUTEUR")
 	private String auteur;
+
+	@ManyToMany
+	@JoinTable(name = "compo",
+
+			joinColumns = @JoinColumn(name = "ID_LIV", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_EMP", referencedColumnName = "ID")
+
+	)
+	List<Emprunt> emprunts;
+
+	public Livre() {
+		emprunts = new ArrayList<Emprunt>();
+	}
+
+	@Override
+	public String toString() {
+		return "id: " + this.getId() + " - titre: " + this.getTitre() + " - auteur: " + this.getAuteur();
+	}
 
 	public Integer getId() {
 		return id;
@@ -34,6 +57,14 @@ public class Livre {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public List<Emprunt> getEmprunts() {
+		return emprunts;
+	}
+
+	public void setEmprunts(List<Emprunt> emprunts) {
+		this.emprunts = emprunts;
 	}
 
 	public String getTitre() {
@@ -51,5 +82,5 @@ public class Livre {
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
-	
+
 }
