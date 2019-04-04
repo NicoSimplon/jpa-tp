@@ -27,6 +27,7 @@ public class Emprunt {
 
 	@Id // obligatoire
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Integer id;
 
 	@Column(name = "DATE_DEBUT")
