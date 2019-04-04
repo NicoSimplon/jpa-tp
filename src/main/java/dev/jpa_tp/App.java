@@ -1,5 +1,9 @@
 package dev.jpa_tp;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -64,15 +68,17 @@ public class App {
 		
 		empruntClient.forEach(e -> {
 			
-			System.out.println(e.getClient().getNom() + " " + e.getClient().getPrenom() + " -> " + e);
+			System.out.println(e.getClient().getNom() + " " + e.getClient().getPrenom() + " -> " + e.getDelai());
 			
 		});
 		
-		// Exemple persist/merge
-//		Livre livre1 = new Livre();
-//		livre1.setId(201);
-//		livre1.setAuteur("Rossi");
-//		livre1.setTitre("formation jpa");
+		
+		// Ajouter/Modifier un livre
+
+		Livre livre1 = new Livre();
+		livre1.setId(202);
+		livre1.setAuteur("Rossi");
+		livre1.setTitre("formation jpa");
 		
 		// Pour faire un insert
 //		em1.persist(livre1);
