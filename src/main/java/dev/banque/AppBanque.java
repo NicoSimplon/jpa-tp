@@ -15,22 +15,19 @@ public class AppBanque {
 	public static void main(String[] args) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("banque");
-		
+
 		// Initialisation de la base de données
 		EntityManager ema = emf.createEntityManager();
 
-//		EntityTransaction et = ema.getTransaction();
-//		et.begin();
-//		
-//		ema.persist(new Banque());
-//		ema.persist(new Clientb());
-//		ema.persist(new Compte());
-//		ema.persist(new Operation());
-//		
-//		et.commit();
-		
-		
-		
+		// EntityTransaction et = ema.getTransaction();
+		// et.begin();
+		//
+		// ema.persist(new Banque());
+		// ema.persist(new Clientb());
+		// ema.persist(new Compte());
+		// ema.persist(new Operation());
+		//
+		// et.commit();
 
 		// Création de banques test
 
@@ -65,96 +62,95 @@ public class AppBanque {
 
 		// Création de clients test
 		Clientb client1 = new Clientb();
-		 client1.setNom("Lanvin");
-		 client1.setPrenom("Gérard");
-		 client1.setDateNaissance(LocalDate.now());
-		 client1.setBanque(banque);
-		 client1.setAdresse(add1);
+		client1.setNom("Lanvin");
+		client1.setPrenom("Gérard");
+		client1.setDateNaissance(LocalDate.now());
+		client1.setBanque(banque);
+		client1.setAdresse(add1);
 
 		Clientb client2 = new Clientb();
-		 client2.setNom("Bidon");
-		 client2.setPrenom("Bob");
-		 client2.setDateNaissance(LocalDate.now());
-		 client2.setBanque(banque2);
-		 client2.setAdresse(add2);
+		client2.setNom("Bidon");
+		client2.setPrenom("Bob");
+		client2.setDateNaissance(LocalDate.now());
+		client2.setBanque(banque2);
+		client2.setAdresse(add2);
 
 		Clientb client3 = new Clientb();
-		 client3.setNom("Bidon");
-		 client3.setPrenom("Martha");
-		 client3.setDateNaissance(LocalDate.now());
-		 client3.setBanque(banque2);
-		 client3.setAdresse(add2);
+		client3.setNom("Bidon");
+		client3.setPrenom("Martha");
+		client3.setDateNaissance(LocalDate.now());
+		client3.setBanque(banque2);
+		client3.setAdresse(add2);
 
 		Clientb client4 = new Clientb();
-		 client4.setNom("Kent");
-		 client4.setPrenom("Clark");
-		 client4.setDateNaissance(LocalDate.now());
-		 client4.setBanque(banque3);
-		 client4.setAdresse(add3);
+		client4.setNom("Kent");
+		client4.setPrenom("Clark");
+		client4.setDateNaissance(LocalDate.now());
+		client4.setBanque(banque3);
+		client4.setAdresse(add3);
 
 		// Création de comptes test
 
 		Compte compte = new Compte();
-		 compte.setNumero("1c");
-		 compte.setSolde(1000.0);
+		compte.setNumero("1c");
+		compte.setSolde(1000.0);
 
 		Compte compte1 = new Compte();
-		 compte1.setNumero("2c");
-		 compte1.setSolde(1000.0);
+		compte1.setNumero("2c");
+		compte1.setSolde(1000.0);
 
 		Compte compte2 = new Compte();
-		 compte2.setNumero("3c");
-		 compte2.setSolde(1000.0);
+		compte2.setNumero("3c");
+		compte2.setSolde(1000.0);
 
 		// Création des opérations de test
 
 		Operation op1 = new Operation();
-		 op1.setCompte(compte1);
-		 op1.setDate(LocalDateTime.now());
-		 op1.setMontant(100.0);
-		 op1.setMotif("salaire");
+		op1.setCompte(compte1);
+		op1.setDate(LocalDateTime.now());
+		op1.setMontant(100.0);
+		op1.setMotif("salaire");
 
 		Operation op2 = new Operation();
-		 op2.setCompte(compte2);
-		 op2.setDate(LocalDateTime.now());
-		 op2.setMontant(100.0);
-		 op2.setMotif("salaire");
+		op2.setCompte(compte2);
+		op2.setDate(LocalDateTime.now());
+		op2.setMontant(100.0);
+		op2.setMotif("salaire");
 
 		Operation op3 = new Operation();
-		 op3.setCompte(compte);
-		 op3.setDate(LocalDateTime.now());
-		 op3.setMontant(100.0);
-		 op3.setMotif("salaire");
-
-		// Jonction entre les opérations et les comptes
-
-		 List<Operation> listOpe1 = new ArrayList<>();
-		 listOpe1.add(op1);
-		 compte.setOperations(listOpe1);
-		
-		 List<Operation> listOpe2 = new ArrayList<>();
-		 listOpe2.add(op2);
-		 compte.setOperations(listOpe2);
-		
-		 List<Operation> listOpe3 = new ArrayList<>();
-		 listOpe3.add(op3);
-		 compte.setOperations(listOpe3);
+		op3.setCompte(compte);
+		op3.setDate(LocalDateTime.now());
+		op3.setMontant(100.0);
+		op3.setMotif("salaire");
 
 		// Jonction entre les comptes et leur client
 
-		 List<Compte> compteClient1 = new ArrayList<>();
-		 compteClient1.add(compte);
-		 client1.setComptes(compteClient1);
-		
-		 List<Compte> compteClient2 = new ArrayList<>();
-		 compteClient2.add(compte2);
-		 client2.setComptes(compteClient1);
-		 client3.setComptes(compteClient1);
-		
-		 List<Compte> compteClient4 = new ArrayList<>();
-		 compteClient4.add(compte2);
-		 client1.setComptes(compteClient1);
-		
+		List<Compte> compteClient1 = new ArrayList<>();
+		compteClient1.add(compte);
+		client1.setComptes(compteClient1);
+
+		List<Compte> compteClient2 = new ArrayList<>();
+		compteClient2.add(compte2);
+		client2.setComptes(compteClient1);
+		client3.setComptes(compteClient1);
+
+		List<Compte> compteClient4 = new ArrayList<>();
+		compteClient4.add(compte2);
+		client1.setComptes(compteClient1);
+
+		// Jonction entre les opérations et les comptes
+
+		List<Operation> listOpe1 = new ArrayList<>();
+		listOpe1.add(op1);
+		compte.setOperations(listOpe1);
+
+		List<Operation> listOpe2 = new ArrayList<>();
+		listOpe2.add(op2);
+		compte.setOperations(listOpe2);
+
+		List<Operation> listOpe3 = new ArrayList<>();
+		listOpe3.add(op3);
+		compte.setOperations(listOpe3);
 
 		// Rcupération des objets sous forme de listes
 
@@ -173,6 +169,11 @@ public class AppBanque {
 		listCompte.add(compte);
 		listCompte.add(compte1);
 		listCompte.add(compte2);
+		
+		List<Operation> listOperation = new ArrayList<>();
+		listOperation.add(op1);
+		listOperation.add(op2);
+		listOperation.add(op3);
 
 		// Création de l'entity manager
 
@@ -193,7 +194,10 @@ public class AppBanque {
 		for (Compte co : listCompte) {
 			em.persist(co);
 		}
-
+		
+		for (Operation op : listOperation) {
+			em.persist(op);
+		}
 
 		tx.commit();
 
