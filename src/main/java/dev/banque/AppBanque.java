@@ -15,6 +15,22 @@ public class AppBanque {
 	public static void main(String[] args) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("banque");
+		
+		// Initialisation de la base de données
+		EntityManager ema = emf.createEntityManager();
+
+//		EntityTransaction et = ema.getTransaction();
+//		et.begin();
+//		
+//		ema.persist(new Banque());
+//		ema.persist(new Clientb());
+//		ema.persist(new Compte());
+//		ema.persist(new Operation());
+//		
+//		et.commit();
+		
+		
+		
 
 		// Création de banques test
 
@@ -177,6 +193,7 @@ public class AppBanque {
 		for (Compte co : listCompte) {
 			em.persist(co);
 		}
+
 
 		tx.commit();
 
