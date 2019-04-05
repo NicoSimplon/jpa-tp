@@ -1,4 +1,4 @@
-package dev.jpa_tp;
+package dev.bibliotheque;
 
 import java.util.ArrayList;
 import java.util.List;

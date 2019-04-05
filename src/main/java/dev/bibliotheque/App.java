@@ -1,4 +1,4 @@
-package dev.jpa_tp;
+package dev.bibliotheque;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -85,24 +85,6 @@ public class App {
 		
 		// Pour faire une mise à jour
 //		em1.merge(livre1);
-		
-		// Créer un nouvel emprunt
-//		Client client = new Client();
-//		client.setId(20);
-//		client.setNom("Marty");
-//		client.setPrenom("Nicolas");
-//
-//		Emprunt emprunt1 = new Emprunt();
-//		emprunt1.setClient(client);
-//		emprunt1.setDelai(1);
-//		emprunt1.setDateDebut(LocalDateTime.now());
-//		List<Livre> list = new ArrayList<>();
-//		list.add(livre1);
-//		emprunt1.setLivres(list);
-//		emprunt1.setDateFin(LocalDateTime.now());
-//		emprunt1.setId(9);
-//		
-//		em1.persist(emprunt1);
 		
 		// fin de la transaction
 		tx.commit();
