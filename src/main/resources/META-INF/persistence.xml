@@ -13,9 +13,8 @@
 		<class>dev.banque.Operation</class>
 		<class>dev.banque.Virement</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdd-jpa" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa-tp" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 		</properties>
 	</persistence-unit>
@@ -36,10 +35,10 @@
 				value="drop-and-create" />
 			<!-- Affichage des requêtes SQL -->
 			<property name="hibernate.show_sql" value="true" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/banque" />
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://uuvxhl4jzpq996ul:mSltILG8dT7RhwGxQjtt@b9vssokvzbilkamhehbi-mysql.services.clever-cloud.com:3306/b9vssokvzbilkamhehbi?useSSL=false" />
+			<property name="javax.persistence.jdbc.user" value="uuvxhl4jzpq996ul" />
+			<property name="javax.persistence.jdbc.password" value="mSltILG8dT7RhwGxQjtt" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 		</properties>
 	</persistence-unit>
 </persistence>
