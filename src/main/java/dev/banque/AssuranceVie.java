@@ -2,13 +2,16 @@ package dev.banque;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class AssuranceVie extends Compte {
 
+	@Column(name = "TAUX")
 	private double taux;
 
+	@Column(name = "DATE_FIN")
 	private LocalDate dateFin;
 
 	public LocalDate getDateFin() {

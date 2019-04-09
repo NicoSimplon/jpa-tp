@@ -99,9 +99,16 @@ public class AppBanque {
 		compte1.setNumero("2c");
 		compte1.setSolde(1000.0);
 
-		Compte compte2 = new Compte();
+		AssuranceVie compte2 = new AssuranceVie();
 		compte2.setNumero("3c");
 		compte2.setSolde(1000.0);
+		compte2.setTaux(10.0);
+		compte2.setDateFin(LocalDate.now());
+		
+		LivretA compte3 = new LivretA();
+		compte3.setNumero("4c");
+		compte3.setSolde(1000.0);
+		compte3.setTaux(5.0);
 
 		// Création des opérations de test
 
@@ -117,11 +124,12 @@ public class AppBanque {
 		op2.setMontant(100.0);
 		op2.setMotif("salaire");
 
-		Operation op3 = new Operation();
+		Virement op3 = new Virement();
 		op3.setCompte(compte);
 		op3.setDate(LocalDateTime.now());
 		op3.setMontant(100.0);
-		op3.setMotif("salaire");
+		op3.setMotif("cadeau");
+		op3.setBeneficiaire("Bob Lennon");
 
 		// Jonction entre les comptes et leur client
 
@@ -130,13 +138,13 @@ public class AppBanque {
 		client1.setComptes(compteClient1);
 
 		List<Compte> compteClient2 = new ArrayList<>();
-		compteClient2.add(compte2);
-		client2.setComptes(compteClient1);
-		client3.setComptes(compteClient1);
+		compteClient2.add(compte1);
+		client2.setComptes(compteClient2);
+		client3.setComptes(compteClient2);
 
-		List<Compte> compteClient4 = new ArrayList<>();
-		compteClient4.add(compte2);
-		client1.setComptes(compteClient1);
+		List<Compte> compteClient3 = new ArrayList<>();
+		compteClient3.add(compte3);
+		client1.setComptes(compteClient3);
 
 		// Jonction entre les opérations et les comptes
 

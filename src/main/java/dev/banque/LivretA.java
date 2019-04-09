@@ -1,7 +1,10 @@
 package dev.banque;
 
+import javax.persistence.Column;
+
 public class LivretA extends Compte {
 
+	@Column(name = "TAUX")
 	private double taux;
 
 	public double getTaux() {
