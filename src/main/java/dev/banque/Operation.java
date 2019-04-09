@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Operation {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "ID")
 	Integer id_operation;
 
