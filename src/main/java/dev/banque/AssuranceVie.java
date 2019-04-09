@@ -2,6 +2,9 @@ package dev.banque;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+
+@Entity
 public class AssuranceVie extends Compte {
 
 	private double taux;
