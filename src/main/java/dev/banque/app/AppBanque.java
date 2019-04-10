@@ -20,136 +20,91 @@ import dev.banque.model.Operation;
 import dev.banque.model.Virement;
 
 public class AppBanque {
+	
+	public static Banque createBank(String name) {
+		Banque banque = new Banque();
+		banque.setNom(name);
+		return banque;
+	}
+	
+	public static Adresse createAdress(int codePostal, int numRue, String libelleRue, String ville) {
+		Adresse adresse = new Adresse();
+		adresse.setCodePostal(codePostal);
+		adresse.setNumero(numRue);
+		adresse.setRue(libelleRue);
+		adresse.setVille(ville);
+		return adresse;
+	}
+	
+	public static Clientb createClient(String nom, String prenom, LocalDate dateNaissance, Banque banque, Adresse adresse) {
+		Clientb client = new Clientb();
+		client.setNom(nom);
+		client.setPrenom(prenom);
+		client.setDateNaissance(dateNaissance);
+		client.setBanque(banque);
+		client.setAdresse(adresse);
+		return client;
+	}
+	
+	public static AssuranceVie createAssuranceVie(String identifiantCompte, double solde, double taux, LocalDate dateFin) {
+		AssuranceVie compte = new AssuranceVie();
+		compte.setNumero(identifiantCompte);
+		compte.setSolde(solde);
+		compte.setTaux(taux);
+		compte.setDateFin(dateFin);
+		return compte;
+	}
+	
+	public static LivretA createLivretA(String identifiantCompte, double solde, double taux) {
+		LivretA compte = new LivretA();
+		compte.setNumero(identifiantCompte);
+		compte.setSolde(solde);
+		compte.setTaux(taux);
+		return compte;
+	}
+	
+	public static Virement createVirement(Compte compte, LocalDateTime date, double montant, String motif, String beneficiaire) {
+		Virement operation = new Virement();
+		operation.setCompte(compte);
+		operation.setDate(date);
+		operation.setMontant(montant);
+		operation.setMotif(motif);
+		operation.setBeneficiaire(beneficiaire);
+		return operation;
+	}
 
 	public static void main(String[] args) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("banque");
-
-		// Initialisation de la base de données
-		EntityManager ema = emf.createEntityManager();
-
-//		 EntityTransaction et = ema.getTransaction();
-//		 et.begin();
-//		
-//		 ema.persist(new Banque());
-//		 ema.persist(new Clientb());
-//		 ema.persist(new LivretA());
-//		 ema.persist(new AssuranceVie());
-//		 ema.persist(new Virement());
-//		
-//		 et.commit();
-//		 ema.close();
-
+		
 		// Création de banques test
-
-		Banque banque = new Banque();
-		banque.setNom("Ma super banque");
-
-		Banque banque2 = new Banque();
-		banque2.setNom("Banque à Picsou");
-
-		Banque banque3 = new Banque();
-		banque3.setNom("Banque Love Money");
-
+		Banque banque = createBank("Ma super banque");
+		Banque banque2 = createBank("Banque à Picsou");
+		Banque banque3 = createBank("Banque Love Money");
+		
 		// Création d'adresses de test
-
-		Adresse add1 = new Adresse();
-		add1.setCodePostal(75000);
-		add1.setNumero(2);
-		add1.setRue("Rue bidon");
-		add1.setVille("Paris");
-
-		Adresse add2 = new Adresse();
-		add2.setCodePostal(31000);
-		add2.setNumero(2);
-		add2.setRue("Rue bidon");
-		add2.setVille("Toulouse");
-
-		Adresse add3 = new Adresse();
-		add3.setCodePostal(44000);
-		add3.setNumero(2);
-		add3.setRue("Rue bidon");
-		add3.setVille("Nantes");
+		Adresse adresse1 = createAdress(75000, 2, "Rue bidon", "Paris");
+		Adresse adresse2 = createAdress(31000, 2, "Rue inconnue", "Toulouse");
+		Adresse adresse3 = createAdress(44000, 2, "Rue connue", "Nantes");
 
 		// Création de clients test
-		Clientb client1 = new Clientb();
-		client1.setNom("Lanvin");
-		client1.setPrenom("Gérard");
-		client1.setDateNaissance(LocalDate.now());
-		client1.setBanque(banque);
-		client1.setAdresse(add1);
-
-		Clientb client2 = new Clientb();
-		client2.setNom("Bidon");
-		client2.setPrenom("Bob");
-		client2.setDateNaissance(LocalDate.now());
-		client2.setBanque(banque2);
-		client2.setAdresse(add2);
-
-		Clientb client3 = new Clientb();
-		client3.setNom("Bidon");
-		client3.setPrenom("Martha");
-		client3.setDateNaissance(LocalDate.now());
-		client3.setBanque(banque2);
-		client3.setAdresse(add2);
-
-		Clientb client4 = new Clientb();
-		client4.setNom("Kent");
-		client4.setPrenom("Clark");
-		client4.setDateNaissance(LocalDate.now());
-		client4.setBanque(banque3);
-		client4.setAdresse(add3);
+		Clientb client1 = createClient("Lanvin", "Gérard", LocalDate.now(), banque, adresse1);
+		Clientb client2 = createClient("Bidon", "Bob", LocalDate.now(), banque2, adresse2);
+		Clientb client3 = createClient("Bidon", "Martha", LocalDate.now(), banque2, adresse2);
+		Clientb client4 = createClient("Kent", "Clark", LocalDate.now(), banque3, adresse3);
 
 		// Création de comptes test
-
-		AssuranceVie compte = new AssuranceVie();
-		compte.setNumero("1c");
-		compte.setSolde(1000.0);
-		compte.setTaux(10.0);
-		compte.setDateFin(LocalDate.now());
-
-		AssuranceVie compte1 = new AssuranceVie();
-		compte1.setNumero("2c");
-		compte1.setSolde(1000.0);
-		compte1.setTaux(10.0);
-		compte1.setDateFin(LocalDate.now());
-
-		AssuranceVie compte2 = new AssuranceVie();
-		compte2.setNumero("3c");
-		compte2.setSolde(1000.0);
-		compte2.setTaux(10.0);
-		compte2.setDateFin(LocalDate.now());
-		
-		LivretA compte3 = new LivretA();
-		compte3.setNumero("4c");
-		compte3.setSolde(1000.0);
-		compte3.setTaux(5.0);
+		AssuranceVie compte = createAssuranceVie("1c", 1000.0, 10.0, LocalDate.now());
+		AssuranceVie compte1 = createAssuranceVie("2c", 1000.0, 10.0, LocalDate.now());
+		AssuranceVie compte2 = createAssuranceVie("3c", 1000.0, 10.0, LocalDate.now());
+		LivretA compte3 = createLivretA("4c", 1000.0, 5.0);
 
 		// Création des opérations de test
-
-		Virement op1 = new Virement();
-		op1.setCompte(compte1);
-		op1.setDate(LocalDateTime.now());
-		op1.setMontant(100.0);
-		op1.setMotif("salaire");
-		op1.setBeneficiaire("Bob Lennon");
-
-		Virement op2 = new Virement();
-		op2.setCompte(compte2);
-		op2.setDate(LocalDateTime.now());
-		op2.setMontant(100.0);
-		op2.setMotif("salaire");
-		op2.setBeneficiaire("Bob Lennon");
-
-		Virement op3 = new Virement();
-		op3.setCompte(compte);
-		op3.setDate(LocalDateTime.now());
-		op3.setMontant(100.0);
-		op3.setMotif("cadeau");
-		op3.setBeneficiaire("Bob Lennon");
+		Virement op1 = createVirement(compte1, LocalDateTime.now(), 100.0, "salaire", "Bob Lennon");
+		Virement op2 = createVirement(compte2, LocalDateTime.now(), 100.0, "cadeau", "Bob Lemon");
+		Virement op3 = createVirement(compte, LocalDateTime.now(), 100.0, "cadeau", "Bob Limon");
 
 		// Jonction entre les comptes et leur client
-
 		List<Compte> compteClient1 = new ArrayList<>();
 		compteClient1.add(compte);
 		client1.setComptes(compteClient1);
@@ -159,14 +114,11 @@ public class AppBanque {
 		client2.setComptes(compteClient2);
 		client3.setComptes(compteClient2);
 		
-		//*
 		List<Compte> compteClient3 = new ArrayList<>();
 		compteClient3.add(compte3);
 		client4.setComptes(compteClient3);
-		//*/
 
 		// Jonction entre les opérations et les comptes
-
 		List<Operation> listOpe1 = new ArrayList<>();
 		listOpe1.add(op1);
 		compte.setOperations(listOpe1);
@@ -203,9 +155,7 @@ public class AppBanque {
 		listOperation.add(op3);
 
 		// Création de l'entity manager
-
 		EntityManager em = emf.createEntityManager();
-
 		EntityTransaction tx = em.getTransaction();
 
 		// Pour insérer les données
@@ -235,7 +185,6 @@ public class AppBanque {
 
 		em.close();
 		emf.close();
-
 	}
 
 }
