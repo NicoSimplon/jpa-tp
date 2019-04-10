@@ -1,4 +1,4 @@
-package dev.banque;
+package dev.banque.model;
 
 import java.time.LocalDate;
 import java.util.List;
