@@ -24,7 +24,7 @@ public abstract class Compte {
 	Integer id;
 
 	@ManyToMany(mappedBy = "comptes")
-	private List<Clientb> Clientbs;
+	private List<Clientb> clientbs;
 
 	@Column(name = "NUMERO")
 	private String numero;
@@ -44,11 +44,11 @@ public abstract class Compte {
 	}
 
 	public List<Clientb> getClientbs() {
-		return Clientbs;
+		return clientbs;
 	}
 
 	public void setClientbs(List<Clientb> clientbs) {
-		Clientbs = clientbs;
+		this.clientbs = clientbs;
 	}
 
 	public String getNumero() {
