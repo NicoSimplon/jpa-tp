@@ -82,17 +82,6 @@ public class AppBanque {
 		Banque banque2 = createBank("Banque à Picsou");
 		Banque banque3 = createBank("Banque Love Money");
 		
-		// Création d'adresses de test
-		Adresse adresse1 = createAdress(75000, 2, "Rue bidon", "Paris");
-		Adresse adresse2 = createAdress(31000, 2, "Rue inconnue", "Toulouse");
-		Adresse adresse3 = createAdress(44000, 2, "Rue connue", "Nantes");
-
-		// Création de clients test
-		Clientb client1 = createClient("Lanvin", "Gérard", LocalDate.now(), banque, adresse1);
-		Clientb client2 = createClient("Bidon", "Bob", LocalDate.now(), banque2, adresse2);
-		Clientb client3 = createClient("Bidon", "Martha", LocalDate.now(), banque2, adresse2);
-		Clientb client4 = createClient("Kent", "Clark", LocalDate.now(), banque3, adresse3);
-
 		// Création de comptes test
 		AssuranceVie compte = createAssuranceVie("1c", 1000.0, 10.0, LocalDate.now());
 		AssuranceVie compte1 = createAssuranceVie("2c", 1000.0, 10.0, LocalDate.now());
@@ -103,6 +92,17 @@ public class AppBanque {
 		Virement op1 = createVirement(compte1, LocalDateTime.now(), 100.0, "salaire", "Bob Lennon");
 		Virement op2 = createVirement(compte2, LocalDateTime.now(), 100.0, "cadeau", "Bob Lemon");
 		Virement op3 = createVirement(compte, LocalDateTime.now(), 100.0, "cadeau", "Bob Limon");
+		
+		// Création d'adresses de test
+		Adresse adresse1 = createAdress(75000, 2, "Rue bidon", "Paris");
+		Adresse adresse2 = createAdress(31000, 2, "Rue inconnue", "Toulouse");
+		Adresse adresse3 = createAdress(44000, 2, "Rue connue", "Nantes");
+
+		// Création de clients test
+		Clientb client1 = createClient("Lanvin", "Gérard", LocalDate.now(), banque, adresse1);
+		Clientb client2 = createClient("Bidon", "Bob", LocalDate.now(), banque2, adresse2);
+		Clientb client3 = createClient("Bidon", "Martha", LocalDate.now(), banque2, adresse2);
+		Clientb client4 = createClient("Kent", "Clark", LocalDate.now(), banque3, adresse3);
 
 		// Jonction entre les comptes et leur client
 		List<Compte> compteClient1 = new ArrayList<>();
