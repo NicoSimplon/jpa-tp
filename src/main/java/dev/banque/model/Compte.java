@@ -16,12 +16,12 @@ import javax.persistence.Table;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "compte")
-public class Compte {
+public abstract class Compte {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	Integer id_compte;
+	Integer id;
 
 	@ManyToMany(mappedBy = "comptes")
 	private List<Clientb> Clientbs;
@@ -35,12 +35,12 @@ public class Compte {
 	@OneToMany(mappedBy = "compte")
 	private List<Operation> operations;
 
-	public Integer getId_compte() {
-		return id_compte;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId_compte(Integer id_compte) {
-		this.id_compte = id_compte;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public List<Clientb> getClientbs() {

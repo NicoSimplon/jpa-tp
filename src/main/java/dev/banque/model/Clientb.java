@@ -3,6 +3,7 @@ package dev.banque.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ public class Clientb {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private Integer id_clientb;
+	private Integer id;
 
 	@Column(name = "NOM")
 	private String nom;
@@ -44,12 +45,23 @@ public class Clientb {
 	@Embedded
 	private Adresse adresse;
 
-	public Integer getId_clientb() {
-		return id_clientb;
+	public Integer getId() {
+		return id;
 	}
+	
+	@ManyToOne
+	@JoinColumn(name = "ID_Banque")
+	private Banque banque;
 
-	public void setId_clientb(Integer id_clientb) {
-		this.id_clientb = id_clientb;
+	@ManyToMany (cascade = {CascadeType.ALL})
+	@JoinTable(name = "correspondance", 
+		joinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID"), 
+		inverseJoinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "ID") 
+	)
+	private List<Compte> comptes;
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNom() {
@@ -91,16 +103,5 @@ public class Clientb {
 	public void setComptes(List<Compte> comptes) {
 		this.comptes = comptes;
 	}
-
-	@ManyToOne
-	@JoinColumn(name = "ID_Banque")
-	private Banque banque;
-
-	@ManyToMany
-	@JoinTable(name = "correspondance", 
-		joinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID"), 
-		inverseJoinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "ID")
-	)
-	private List<Compte> comptes;
 
 }

@@ -2,43 +2,42 @@
 <persistence version="2.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="jpa-tp" transaction-type="RESOURCE_LOCAL">
-		<!-- Choix de l'implémentation JPA (ici Hibernate) -->
+	<persistence-unit name="banque" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>dev.banque.model.AssuranceVie</class>
-		<class>dev.banque.model.Banque</class>
-		<class>dev.banque.model.Clientb</class>
-		<class>dev.banque.model.Compte</class>
-		<class>dev.banque.model.LivretA</class>
-		<class>dev.banque.model.Operation</class>
-		<class>dev.banque.model.Virement</class>
+        <!-- Choix de l'implémentation JPA (ici Hibernate) -->
+        <class>dev.banque.model.AssuranceVie</class>
+        <class>dev.banque.model.Banque</class>
+        <class>dev.banque.model.Clientb</class>
+        <class>dev.banque.model.Compte</class>
+        <class>dev.banque.model.LivretA</class>
+        <class>dev.banque.model.Operation</class>
+        <class>dev.banque.model.Virement</class>
+        <class>dev.banque.model.Adresse</class>
+        <properties>
+            <!-- desactiver l'autodetection des classes de type @Entity -->
+            <property name="hibernate.archive.autodetection" value="" />
+            <!-- Activation de la génération des tables manquantes uniquement -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <!-- Drop and create à chaque redémarrage -->
+            <property name="javax.persistence.schema-generation.database.action"
+                value="drop-and-create" />
+            <!-- Affichage des requêtes SQL -->
+            <property name="hibernate.show_sql" value="true" />
+            <property name="javax.persistence.jdbc.url"
+                value="jdbc:mysql://uuvxhl4jzpq996ul:mSltILG8dT7RhwGxQjtt@b9vssokvzbilkamhehbi-mysql.services.clever-cloud.com:3306/b9vssokvzbilkamhehbi?useSSL=false" />
+            <property name="javax.persistence.jdbc.user" value="uuvxhl4jzpq996ul" />
+            <property name="javax.persistence.jdbc.password" value="mSltILG8dT7RhwGxQjtt" />
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+        </properties>
+    </persistence-unit>
+	<persistence-unit name="jpa-tp" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<!-- Choix de l'implémentation JPA (ici Hibernate) -->
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa-tp" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 		</properties>
 	</persistence-unit>
-	<persistence-unit name="banque" transaction-type="RESOURCE_LOCAL">
-		<!-- Choix de l'implémentation JPA (ici Hibernate) -->
-		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>dev.banque.Banque</class>
-		<class>dev.banque.Clientb</class>
-		<class>dev.banque.Compte</class>
-		<class>dev.banque.Operation</class>
-		<properties>
-			<!-- desactiver l'autodetection des classes de type @Entity -->
-			<property name="hibernate.archive.autodetection" value="" />
-			<!-- Activation de la génération des tables manquantes uniquement -->
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<!-- Drop and create à chaque redémarrage -->
-			<property name="javax.persistence.schema-generation.database.action"
-				value="drop-and-create" />
-			<!-- Affichage des requêtes SQL -->
-			<property name="hibernate.show_sql" value="true" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://uuvxhl4jzpq996ul:mSltILG8dT7RhwGxQjtt@b9vssokvzbilkamhehbi-mysql.services.clever-cloud.com:3306/b9vssokvzbilkamhehbi?useSSL=false" />
-			<property name="javax.persistence.jdbc.user" value="uuvxhl4jzpq996ul" />
-			<property name="javax.persistence.jdbc.password" value="mSltILG8dT7RhwGxQjtt" />
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-		</properties>
-	</persistence-unit>
+	
 </persistence>

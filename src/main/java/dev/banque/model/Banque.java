@@ -17,7 +17,7 @@ public class Banque {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private Integer id_banque;
+	private Integer id;
 	
 	@Column(name = "NOM")
 	private String nom;
@@ -25,12 +25,12 @@ public class Banque {
 	@OneToMany(mappedBy = "banque")
 	private List<Clientb> clientbs;
 
-	public Integer getId_banque() {
-		return id_banque;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId_banque(Integer id_banque) {
-		this.id_banque = id_banque;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNom() {

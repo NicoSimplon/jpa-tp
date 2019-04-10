@@ -13,12 +13,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "operation")
-public class Operation {
+public abstract class Operation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	Integer id_operation;
+	Integer id;
 
 	@Column(name = "DATE_OPE")
 	LocalDateTime date;
@@ -33,12 +33,12 @@ public class Operation {
 	@JoinColumn(name = "ID_COMPTE")
 	Compte compte;
 
-	public Integer getId_operation() {
-		return id_operation;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId_operation(Integer id_operation) {
-		this.id_operation = id_operation;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public LocalDateTime getDate() {
