@@ -87,11 +87,18 @@ public class AppBanque {
 		AssuranceVie compte1 = createAssuranceVie("2c", 1000.0, 10.0, LocalDate.now());
 		AssuranceVie compte2 = createAssuranceVie("3c", 1000.0, 10.0, LocalDate.now());
 		LivretA compte3 = createLivretA("4c", 1000.0, 5.0);
+		Compte compte4 = new Compte();
+		compte4.setNumero("5c");
+		compte4.setSolde(500.0);
 
 		// Création des opérations de test
 		Virement op1 = createVirement(compte1, LocalDateTime.now(), 100.0, "salaire", "Bob Lennon");
 		Virement op2 = createVirement(compte2, LocalDateTime.now(), 100.0, "cadeau", "Bob Lemon");
-		Virement op3 = createVirement(compte, LocalDateTime.now(), 100.0, "cadeau", "Bob Limon");
+		Operation op3 = new Operation();
+		op3.setCompte(compte);
+		op3.setDate(LocalDateTime.now());
+		op3.setMontant(1000.0);
+		op3.setMotif("cadeau");
 		
 		// Création d'adresses de test
 		Adresse adresse1 = createAdress(75000, 2, "Rue bidon", "Paris");
@@ -116,6 +123,7 @@ public class AppBanque {
 		
 		List<Compte> compteClient3 = new ArrayList<>();
 		compteClient3.add(compte3);
+		compteClient3.add(compte4);
 		client4.setComptes(compteClient3);
 
 		// Jonction entre les opérations et les comptes
