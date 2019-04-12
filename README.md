@@ -14,5 +14,5 @@ La partie insersion et modification du code a été commentée. En la décomment
 
 Utilisation la techno JPA (JAVA Persistence API).
 
-Pour faire fonctionner cette partie, il vous est nécessaire de de configurer le fichier persistence.xml pour utiliser une base de données MySQL de votre choix.
+Pour faire fonctionner cette partie, il vous est nécessaire de de configurer le fichier persistence.xml pour utiliser une base de données MySQL de votre choix. Par défaut, cette partie utilise une base de données sur un serveur distant (et donc inaccessible pour vous).
 
