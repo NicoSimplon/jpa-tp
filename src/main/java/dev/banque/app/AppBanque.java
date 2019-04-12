@@ -46,6 +46,13 @@ public class AppBanque {
 		return client;
 	}
 	
+	public static Compte createCompte(String identifiantCompte, double solde) {
+		Compte compte = new Compte();
+		compte.setNumero(identifiantCompte);
+		compte.setSolde(solde);
+		return compte;
+	}
+
 	public static AssuranceVie createAssuranceVie(String identifiantCompte, double solde, double taux, LocalDate dateFin) {
 		AssuranceVie compte = new AssuranceVie();
 		compte.setNumero(identifiantCompte);
@@ -63,14 +70,23 @@ public class AppBanque {
 		return compte;
 	}
 	
-	public static Virement createVirement(Compte compte, LocalDateTime date, double montant, String motif, String beneficiaire) {
-		Virement operation = new Virement();
+	public static Operation createOperation(Compte compte, LocalDateTime date, double montant, String motif) {
+		Operation operation = new Operation();
 		operation.setCompte(compte);
 		operation.setDate(date);
 		operation.setMontant(montant);
 		operation.setMotif(motif);
-		operation.setBeneficiaire(beneficiaire);
 		return operation;
+	}
+	
+	public static Virement createVirement(Compte compte, LocalDateTime date, double montant, String motif, String beneficiaire) {
+		Virement virement = new Virement();
+		virement.setCompte(compte);
+		virement.setDate(date);
+		virement.setMontant(montant);
+		virement.setMotif(motif);
+		virement.setBeneficiaire(beneficiaire);
+		return virement;
 	}
 
 	public static void main(String[] args) {
@@ -87,18 +103,12 @@ public class AppBanque {
 		AssuranceVie compte1 = createAssuranceVie("2c", 1000.0, 10.0, LocalDate.now());
 		AssuranceVie compte2 = createAssuranceVie("3c", 1000.0, 10.0, LocalDate.now());
 		LivretA compte3 = createLivretA("4c", 1000.0, 5.0);
-		Compte compte4 = new Compte();
-		compte4.setNumero("5c");
-		compte4.setSolde(500.0);
+		Compte compte4 = createCompte("5c", 500.0);
 
 		// Création des opérations de test
 		Virement op1 = createVirement(compte1, LocalDateTime.now(), 100.0, "salaire", "Bob Lennon");
 		Virement op2 = createVirement(compte2, LocalDateTime.now(), 100.0, "cadeau", "Bob Lemon");
-		Operation op3 = new Operation();
-		op3.setCompte(compte);
-		op3.setDate(LocalDateTime.now());
-		op3.setMontant(1000.0);
-		op3.setMotif("cadeau");
+		Operation op3 = createOperation(compte, LocalDateTime.now(), 100.0, "impôts");
 		
 		// Création d'adresses de test
 		Adresse adresse1 = createAdress(75000, 2, "Rue bidon", "Paris");
