@@ -21,12 +21,27 @@ import dev.banque.model.Virement;
 
 public class AppBanque {
 	
+	/**
+	 * Retourne une instance de Banque
+	 * 
+	 * @param name
+	 * @return Banque
+	 */
 	public static Banque createBank(String name) {
 		Banque banque = new Banque();
 		banque.setNom(name);
 		return banque;
 	}
 	
+	/**
+	 * Retourne une instance d'Adresse
+	 * 
+	 * @param codePostal
+	 * @param numRue
+	 * @param libelleRue
+	 * @param ville
+	 * @return Adresse
+	 */
 	public static Adresse createAdress(int codePostal, int numRue, String libelleRue, String ville) {
 		Adresse adresse = new Adresse();
 		adresse.setCodePostal(codePostal);
@@ -36,6 +51,16 @@ public class AppBanque {
 		return adresse;
 	}
 	
+	/**
+	 * Retourne une instance de Clientb
+	 * 
+	 * @param nom
+	 * @param prenom
+	 * @param dateNaissance
+	 * @param banque
+	 * @param adresse
+	 * @return Clientb
+	 */
 	public static Clientb createClient(String nom, String prenom, LocalDate dateNaissance, Banque banque, Adresse adresse) {
 		Clientb client = new Clientb();
 		client.setNom(nom);
@@ -46,6 +71,13 @@ public class AppBanque {
 		return client;
 	}
 	
+	/**
+	 * Retourne une instance de Compte
+	 * 
+	 * @param identifiantCompte
+	 * @param solde
+	 * @return Compte
+	 */
 	public static Compte createCompte(String identifiantCompte, double solde) {
 		Compte compte = new Compte();
 		compte.setNumero(identifiantCompte);
@@ -53,6 +85,15 @@ public class AppBanque {
 		return compte;
 	}
 
+	/**
+	 * Retourne une instance d'AssuranceVie
+	 * 
+	 * @param identifiantCompte
+	 * @param solde
+	 * @param taux
+	 * @param dateFin
+	 * @return AssuranceVie
+	 */
 	public static AssuranceVie createAssuranceVie(String identifiantCompte, double solde, double taux, LocalDate dateFin) {
 		AssuranceVie compte = new AssuranceVie();
 		compte.setNumero(identifiantCompte);
@@ -62,6 +103,14 @@ public class AppBanque {
 		return compte;
 	}
 	
+	/**
+	 * Retourne une instance de LivretA
+	 * 
+	 * @param identifiantCompte
+	 * @param solde
+	 * @param taux
+	 * @return LivretA
+	 */
 	public static LivretA createLivretA(String identifiantCompte, double solde, double taux) {
 		LivretA compte = new LivretA();
 		compte.setNumero(identifiantCompte);
@@ -70,6 +119,15 @@ public class AppBanque {
 		return compte;
 	}
 	
+	/**
+	 * Retourne une instance d'Operation
+	 * 
+	 * @param compte
+	 * @param date
+	 * @param montant
+	 * @param motif
+	 * @return Operation
+	 */
 	public static Operation createOperation(Compte compte, LocalDateTime date, double montant, String motif) {
 		Operation operation = new Operation();
 		operation.setCompte(compte);
@@ -79,6 +137,16 @@ public class AppBanque {
 		return operation;
 	}
 	
+	/**
+	 * Retourne une instance de Virement
+	 * 
+	 * @param compte
+	 * @param date
+	 * @param montant
+	 * @param motif
+	 * @param beneficiaire
+	 * @return Virement
+	 */
 	public static Virement createVirement(Compte compte, LocalDateTime date, double montant, String motif, String beneficiaire) {
 		Virement virement = new Virement();
 		virement.setCompte(compte);
@@ -150,7 +218,6 @@ public class AppBanque {
 		compte.setOperations(listOpe3);
 
 		// Rcupération des objets sous forme de listes
-
 		List<Banque> listBanque = new ArrayList<>();
 		listBanque.add(banque);
 		listBanque.add(banque2);
@@ -178,27 +245,19 @@ public class AppBanque {
 
 		// Pour insérer les données
 		tx.begin();
-		for (Banque b : listBanque) {
-			em.persist(b);
-		}
+		listBanque.forEach(b -> em.persist(b));
 		tx.commit();
 		
 		tx.begin();
-		for (Compte co : listCompte) {
-			em.persist(co);
-		}
+		listCompte.forEach(co -> em.persist(co));
 		tx.commit();
 		
 		tx.begin();
-		for (Operation op : listOperation) {
-			em.persist(op);
-		}
+		listOperation.forEach(op -> em.persist(op));
 		tx.commit();
 		
 		tx.begin();
-		for (Clientb c : listClients) {
-			em.persist(c);
-		}
+		listClients.forEach(c -> em.persist(c));
 		tx.commit();
 
 		em.close();
