@@ -9,6 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import dev.banque.model.Adresse;
 import dev.banque.model.AssuranceVie;
@@ -20,7 +24,9 @@ import dev.banque.model.Operation;
 import dev.banque.model.Virement;
 
 public class AppBanque {
-	
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(AppBanque.class);
+
 	/**
 	 * Retourne une instance de Banque
 	 * 
@@ -32,7 +38,7 @@ public class AppBanque {
 		banque.setNom(name);
 		return banque;
 	}
-	
+
 	/**
 	 * Retourne une instance d'Adresse
 	 * 
@@ -50,7 +56,7 @@ public class AppBanque {
 		adresse.setVille(ville);
 		return adresse;
 	}
-	
+
 	/**
 	 * Retourne une instance de Clientb
 	 * 
@@ -61,7 +67,8 @@ public class AppBanque {
 	 * @param adresse
 	 * @return Clientb
 	 */
-	public static Clientb createClient(String nom, String prenom, LocalDate dateNaissance, Banque banque, Adresse adresse) {
+	public static Clientb createClient(String nom, String prenom, LocalDate dateNaissance, Banque banque,
+			Adresse adresse) {
 		Clientb client = new Clientb();
 		client.setNom(nom);
 		client.setPrenom(prenom);
@@ -70,7 +77,7 @@ public class AppBanque {
 		client.setAdresse(adresse);
 		return client;
 	}
-	
+
 	/**
 	 * Retourne une instance de Compte
 	 * 
@@ -94,7 +101,8 @@ public class AppBanque {
 	 * @param dateFin
 	 * @return AssuranceVie
 	 */
-	public static AssuranceVie createAssuranceVie(String identifiantCompte, double solde, double taux, LocalDate dateFin) {
+	public static AssuranceVie createAssuranceVie(String identifiantCompte, double solde, double taux,
+			LocalDate dateFin) {
 		AssuranceVie compte = new AssuranceVie();
 		compte.setNumero(identifiantCompte);
 		compte.setSolde(solde);
@@ -102,7 +110,7 @@ public class AppBanque {
 		compte.setDateFin(dateFin);
 		return compte;
 	}
-	
+
 	/**
 	 * Retourne une instance de LivretA
 	 * 
@@ -118,7 +126,7 @@ public class AppBanque {
 		compte.setTaux(taux);
 		return compte;
 	}
-	
+
 	/**
 	 * Retourne une instance d'Operation
 	 * 
@@ -136,7 +144,7 @@ public class AppBanque {
 		operation.setMotif(motif);
 		return operation;
 	}
-	
+
 	/**
 	 * Retourne une instance de Virement
 	 * 
@@ -147,7 +155,8 @@ public class AppBanque {
 	 * @param beneficiaire
 	 * @return Virement
 	 */
-	public static Virement createVirement(Compte compte, LocalDateTime date, double montant, String motif, String beneficiaire) {
+	public static Virement createVirement(Compte compte, LocalDateTime date, double montant, String motif,
+			String beneficiaire) {
 		Virement virement = new Virement();
 		virement.setCompte(compte);
 		virement.setDate(date);
@@ -160,12 +169,12 @@ public class AppBanque {
 	public static void main(String[] args) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("banque");
-		
+
 		// Création de banques test
 		Banque banque = createBank("Ma super banque");
 		Banque banque2 = createBank("Banque à Picsou");
 		Banque banque3 = createBank("Banque Love Money");
-		
+
 		// Création de comptes test
 		AssuranceVie compte = createAssuranceVie("1c", 1000.0, 10.0, LocalDate.now());
 		AssuranceVie compte1 = createAssuranceVie("2c", 1000.0, 10.0, LocalDate.now());
@@ -177,7 +186,7 @@ public class AppBanque {
 		Virement op1 = createVirement(compte1, LocalDateTime.now(), 100.0, "salaire", "Bob Lennon");
 		Virement op2 = createVirement(compte2, LocalDateTime.now(), 100.0, "cadeau", "Bob Lemon");
 		Operation op3 = createOperation(compte, LocalDateTime.now(), 100.0, "impôts");
-		
+
 		// Création d'adresses de test
 		Adresse adresse1 = createAdress(75000, 2, "Rue bidon", "Paris");
 		Adresse adresse2 = createAdress(31000, 2, "Rue inconnue", "Toulouse");
@@ -198,7 +207,7 @@ public class AppBanque {
 		compteClient2.add(compte1);
 		client2.setComptes(compteClient2);
 		client3.setComptes(compteClient2);
-		
+
 		List<Compte> compteClient3 = new ArrayList<>();
 		compteClient3.add(compte3);
 		compteClient3.add(compte4);
@@ -233,7 +242,7 @@ public class AppBanque {
 		listCompte.add(compte);
 		listCompte.add(compte1);
 		listCompte.add(compte2);
-		
+
 		List<Operation> listOperation = new ArrayList<>();
 		listOperation.add(op1);
 		listOperation.add(op2);
@@ -247,20 +256,94 @@ public class AppBanque {
 		tx.begin();
 		listBanque.forEach(b -> em.persist(b));
 		tx.commit();
-		
+
 		tx.begin();
 		listCompte.forEach(co -> em.persist(co));
 		tx.commit();
-		
+
 		tx.begin();
 		listOperation.forEach(op -> em.persist(op));
 		tx.commit();
-		
+
 		tx.begin();
 		listClients.forEach(c -> em.persist(c));
 		tx.commit();
 
 		em.close();
+
+		/*
+		 * Cette partie sert à afficher quelques informations tirées de la base
+		 * de données une fois qu'elle est crée
+		 */
+
+		EntityManager em2 = emf.createEntityManager();
+
+		// Afficher les clients
+		TypedQuery<Clientb> requeteClient = em2.createQuery("select c from Clientb c", Clientb.class);
+		List<Clientb> clientsList = requeteClient.getResultList();
+
+		LOGGER.info("-------------");
+		LOGGER.info("Liste des clients:");
+		LOGGER.info("-------------");
+
+		clientsList.forEach(client -> {
+			LOGGER.info("-------------");
+			LOGGER.info(client.getNom());
+			LOGGER.info(client.getPrenom());
+			LOGGER.info(client.getAdresse().getVille());
+			LOGGER.info("-------------");
+		});
+		em2.close();
+
+		EntityManager em3 = emf.createEntityManager();
+
+		TypedQuery<Compte> requeteCompte = em3.createQuery("select co from Compte co", Compte.class);
+		List<Compte> comptesList = requeteCompte.getResultList();
+
+		LOGGER.info("-------------");
+		LOGGER.info("Liste des ccomptes:");
+		LOGGER.info("-------------");
+
+		comptesList.forEach(co -> {
+			LOGGER.info("-------------");
+			LOGGER.info("id: " + co.getId());
+			LOGGER.info(co.getNumero());
+			LOGGER.info("solde: " + co.getSolde());
+			LOGGER.info("titulaires:");
+
+			for (Clientb c : co.getClientbs()) {
+				LOGGER.info(c.getNom() + "-" + c.getPrenom());
+			}
+
+			LOGGER.info("opérations:");
+
+			for (Operation oper : co.getOperations()) {
+				LOGGER.info(oper.getMotif() + "-" + oper.getMontant());
+			}
+
+			LOGGER.info("-------------");
+		});
+		em3.close();
+
+		EntityManager em4 = emf.createEntityManager();
+
+		TypedQuery<LivretA> requeteLivretA = em4.createQuery("select la from LivretA la", LivretA.class);
+		List<LivretA> livretList = requeteLivretA.getResultList();
+
+		LOGGER.info("-------------");
+		LOGGER.info("Liste des livrets A:");
+		LOGGER.info("-------------");
+
+		livretList.forEach(la -> {
+			LOGGER.info("-------------");
+			LOGGER.info("id: " + la.getId());
+			LOGGER.info(la.getNumero());
+			LOGGER.info("solde: " + la.getSolde());
+			LOGGER.info("taux: " + la.getTaux());
+			LOGGER.info("-------------");
+		});
+		em4.close();
+
 		emf.close();
 	}
 

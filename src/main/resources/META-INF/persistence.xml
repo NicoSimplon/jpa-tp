@@ -34,9 +34,10 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- Choix de l'implémentation JPA (ici Hibernate) -->
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa-tp" />
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://uduawooytvbsok3x:DmbcRHPqMFCvzi8pYeNw@bkmg2u7cp3c7smgilkt6-mysql.services.clever-cloud.com:3306/bkmg2u7cp3c7smgilkt6" />
+			<property name="javax.persistence.jdbc.user" value="uduawooytvbsok3x" />
+			<property name="javax.persistence.jdbc.password" value="DmbcRHPqMFCvzi8pYeNw"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 		</properties>
 	</persistence-unit>
 	
