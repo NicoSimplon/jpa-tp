@@ -3,6 +3,12 @@ package dev.banque.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+/**
+ * Entité représentant un type spécifique d'opération bancaire: Virement
+ * 
+ * @author Nicolas
+ *
+ */
 @Entity
 public class Virement extends Operation {
 

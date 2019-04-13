@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author Nicolas
  *
  */
-@Entity // obligatoire
+@Entity
 @Table(name = "client")
 public class Client {
 
@@ -36,7 +36,7 @@ public class Client {
 	private List<Emprunt> emprunts;
 	
 	public Client() {
-		emprunts = new ArrayList<Emprunt>();
+		emprunts = new ArrayList<>();
 	}
 
 	public Integer getId() {
@@ -65,7 +65,7 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", emprunts=" + emprunts + "]";
+		return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
 	}
 
 }

@@ -11,6 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Entité représentant une opération bancaire générique.
+ * Chaque opération est associée au compte sur lequel elle est effectuée.
+ * 
+ * @author Nicolas
+ *
+ */
 @Entity
 @Table(name = "operation")
 public class Operation {

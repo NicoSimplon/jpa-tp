@@ -3,6 +3,12 @@ package dev.banque.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+/**
+ * Cette classe représentant une adresse vient compléter la classe client.
+ * 
+ * @author Nicolas
+ *
+ */
 @Embeddable
 public class Adresse {
 

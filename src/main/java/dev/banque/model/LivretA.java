@@ -3,6 +3,12 @@ package dev.banque.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+/**
+ * Entité représentant un type de compte: Livret A
+ * 
+ * @author Nicolas
+ *
+ */
 @Entity
 public class LivretA extends Compte {
 

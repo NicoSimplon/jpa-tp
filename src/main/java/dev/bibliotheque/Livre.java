@@ -19,11 +19,11 @@ import javax.persistence.Table;
  * @author Nicolas
  *
  */
-@Entity // obligatoire
+@Entity
 @Table(name = "livre")
 public class Livre {
 
-	@Id // obligatoire
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Integer id;
@@ -37,13 +37,14 @@ public class Livre {
 	@ManyToMany
 	@JoinTable(name = "compo",
 
-			joinColumns = @JoinColumn(name = "ID_LIV", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_EMP", referencedColumnName = "ID")
+			joinColumns = @JoinColumn(name = "ID_LIV", referencedColumnName = "ID"), 
+			inverseJoinColumns = @JoinColumn(name = "ID_EMP", referencedColumnName = "ID")
 
 	)
 	List<Emprunt> emprunts;
 
 	public Livre() {
-		emprunts = new ArrayList<Emprunt>();
+		emprunts = new ArrayList<>();
 	}
 
 	@Override

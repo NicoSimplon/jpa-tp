@@ -10,6 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Entité représentant une banque. 
+ * Une banque peut avoir un ou plusieurs client(s).
+ * 
+ * @author Nicolas
+ *
+ */
 @Entity
 @Table(name = "banque")
 public class Banque {

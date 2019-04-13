@@ -5,6 +5,12 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+/**
+ * Entité représentant le type de compte: Assurance Vie
+ * 
+ * @author Nicolas
+ *
+ */
 @Entity
 public class AssuranceVie extends Compte {
 

@@ -13,6 +13,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Entité représentant un compte bancaire. Ceci correspond à un compte courant.
+ * Un même compte peut être associé à plusieurs clients.
+ * Chaque compte garde une trace des opérations bancaires qui sont effectuées sur lui.
+ * 
+ * @author Nicolas
+ *
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "compte")

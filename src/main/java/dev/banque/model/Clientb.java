@@ -16,6 +16,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+/**
+ * Entité représentant un client d'une banque. Un client va pouvoir avoir un ou plusieurs comptes.
+ * Il peut les posséder seul ou à plusieurs. Il ne peut cependant avoir q'une seule banque.
+ * 
+ * @author Nicolas
+ *
+ */
 @Entity
 @Table(name = "clientb")
 public class Clientb {

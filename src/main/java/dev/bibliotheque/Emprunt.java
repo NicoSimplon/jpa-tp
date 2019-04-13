@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,11 +20,11 @@ import javax.persistence.Table;
  * @author Nicolas
  *
  */
-@Entity // obligatoire
+@Entity
 @Table(name = "emprunt")
 public class Emprunt {
 
-	@Id // obligatoire
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Integer id;
@@ -55,7 +54,7 @@ public class Emprunt {
 	}
 
 	public Emprunt() {
-		livres = new ArrayList<Livre>();
+		livres = new ArrayList<>();
 	}
 
 	public Integer getId() {
